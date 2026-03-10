@@ -63,16 +63,16 @@ const App = () => {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative"
+            className="hero-img-container"
           >
-            <div className="glass p-4 rounded-[32px] overflow-hidden shadow-2xl">
+            <div className="glass p-2 sm:p-4 rounded-[32px] overflow-hidden shadow-2xl">
               <img 
                 src={hero.image} 
                 alt="Touring Bike" 
-                className="w-full rounded-2xl grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+                className="hero-img grayscale-[20%] hover:grayscale-0 transition-all duration-500"
               />
             </div>
           </motion.div>

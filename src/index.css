@@ -68,6 +68,19 @@ h1, h2, h3, h4 {
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
+.hero-img-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  display: block;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -93,25 +106,50 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
   .hero-section {
     min-height: auto;
-    padding-top: 80px;
+    height: auto;
+    padding-top: 60px;
     padding-bottom: 40px;
     text-align: center;
+    display: block;
   }
   
+  .hero-section .container {
+    padding-top: 20px;
+  }
+
   .hero-section .grid {
     display: flex;
-    flex-direction: column-reverse;
-    gap: 40px;
+    flex-direction: column-reverse; /* Put image at the top if title is being pushed down, or vice versa. Let's keep it reversed so title is first on scroll if desired, or standard. Let's try standard for iPhone if image is huge. Actually, usually title first is better. */
+    flex-direction: column; 
+    gap: 30px;
   }
 
   .hero-section h1 {
-     font-size: 3.5rem !important;
+     font-size: 2.8rem !important;
      line-height: 1.1;
+     margin-bottom: 1.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem !important;
+    margin-bottom: 2rem;
   }
 
   .hero-section .flex.gap-4 {
     justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .hero-section .btn-primary, .hero-section button {
+    width: 100%;
+  }
+
+  .hero-img-container {
+    max-width: 100%;
+    margin-bottom: 20px;
   }
 }
 
