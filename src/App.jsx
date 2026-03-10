@@ -35,13 +35,30 @@ const App = () => {
             <p className="text-text-secondary text-xl mb-8 max-w-lg">
               {hero.subtitle}
             </p>
-            <div className="flex gap-4">
-              <button className="btn-primary flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button 
+                onClick={() => document.getElementById('itinerary').scrollIntoView({ behavior: 'smooth' })}
+                className="btn-primary flex items-center justify-center gap-2"
+              >
                 Explore Route <ChevronRight size={20} />
               </button>
-              <div className="flex items-center gap-2 text-text-secondary glass px-4 py-2 rounded-xl">
-                <Calendar size={18} /> Starts Thursday
-              </div>
+              <button 
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: 'Bikepacking Tour de Flanders',
+                      text: 'Check out our 5-day cycle itinerary!',
+                      url: window.location.href,
+                    }).catch(console.error);
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Link copied to clipboard!');
+                  }
+                }}
+                className="flex items-center justify-center gap-2 text-text-secondary glass px-4 py-3 rounded-xl hover:text-white transition-colors"
+              >
+                Share Itinerary
+              </button>
             </div>
           </motion.div>
 
@@ -63,16 +80,16 @@ const App = () => {
       </section>
 
       {/* Itinerary Section */}
-      <section className="py-24 container">
+      <section id="itinerary" className="py-16 md:py-24 container">
         <motion.div
            initial={{ opacity: 0, y: 30 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 0.6 }}
-           className="mb-16"
+           className="mb-12 md:mb-16"
         >
-          <h2 className="text-4xl mb-4">The Journey Begins</h2>
-          <p className="text-text-secondary text-lg">Detailed day-by-day plan for our grand departure.</p>
+          <h2 className="text-3xl md:text-4xl mb-4 text-center md:text-left">The Journey Begins</h2>
+          <p className="text-text-secondary text-lg text-center md:text-left">Detailed day-by-day plan for our grand departure.</p>
         </motion.div>
 
         <div className="max-w-4xl">
@@ -175,12 +192,12 @@ const App = () => {
                 {/* Day 2 Arrival & Cycling */}
                 {day.id === 2 && (
                   <>
-                    <div className="glass p-6 rounded-2xl inline-flex gap-8 items-center">
+                    <div className="glass p-6 rounded-2xl flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
                       <div className="flex flex-col">
                         <span className="text-xs text-text-secondary">Arrival Time</span>
                         <span className="font-bold text-teal-400">{day.arrival.time}</span>
                       </div>
-                      <div className="h-8 w-[1px] bg-glass-border" />
+                      <div className="hidden sm:block h-8 w-[1px] bg-glass-border" />
                       <div className="flex flex-col">
                         <span className="text-xs text-text-secondary">Vessel</span>
                         <span className="font-bold">{day.arrival.vessel}</span>
